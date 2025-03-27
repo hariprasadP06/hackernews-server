@@ -13,6 +13,7 @@ import jwt from "jsonwebtoken";
 import { prismaClient } from "../extras/prisma.js";
 import { Private_Secret_Key } from "../../environment.js";
 import { authenticationRoutes } from "./authentication-routes.js";
+import { postsRoutes } from "./post-routes.js";
 
 export const allRoutes = new Hono();
 
@@ -49,34 +50,5 @@ allRoutes.get(
     return c.json(user, 200);
   }
 );
-allRoutes.get(
-  "/health",
-  async (context, next) => {
-    console.log("HTTP METHIOD", context.req.method);
-    console.log("URL", context.req.url);
-    console.log("HEADERS", context.req.header());
-    const authorization = context.req.header("Authorization");
 
-    if (!authorization) {
-      return context.json(
-        {
-          message: "Unauthorized",
-        },
-        401
-      );
-    }
-    next();
-  },
-  (context) => {
-    console.log("Health Checked");
-    return context.json(
-      {
-        message: "All Ok",
-      },
-      200
-    );
-  }
-);
-function next() {
-  throw new Error("Function not implemented.");
-}
+allRoutes.route("/posts", postsRoutes);
