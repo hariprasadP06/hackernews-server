@@ -39,7 +39,7 @@ usersRoutes.get("/me", tokenMiddleware, async (context) => {
   }
 });
 
-// /users
+//users
 usersRoutes.get("", tokenMiddleware, async (context) => {
   try {
     const users = await getAllUsers();
