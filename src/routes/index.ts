@@ -14,6 +14,7 @@ import { prismaClient } from "../extras/prisma.js";
 import { Private_Secret_Key } from "../../environment.js";
 import { authenticationRoutes } from "./authentication-routes.js";
 import { postsRoutes } from "./post-routes.js";
+import { likesRoutes } from "./like-routes.js";
 
 export const allRoutes = new Hono();
 
@@ -52,3 +53,4 @@ allRoutes.get(
 );
 
 allRoutes.route("/posts", postsRoutes);
+allRoutes.route("/like", likesRoutes);
